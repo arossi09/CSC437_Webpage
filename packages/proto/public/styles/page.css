@@ -1,24 +1,45 @@
+header{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    background-color: black;
+    color: white;
+}
+
+
 h1 { 
     color: white;
-    text-align: center;
-    background-color: black;
-
+    padding: 0px var(--size-spacing-large);
 }
+
+h2 {
+    padding: 0px var(--size-spacing-xlarge);
+}
+
 .song {
     width: fit-content;
-    border-color: black;
-    border: solid;
-    margin: 10px 10px;
-    padding: 10px 10px;
+    border-color: blue;
+    padding: var(--size-spacing-small);
+    margin: var(--size-spacing-small);
     text-align: center;
 }
 body {
-    background-color: #FDF79A;
+    /*"Lucida Console", "Courier New", "monospace";*/
+    background-color: #FFFFC2;
+
+}
+.box{
+    width: 45em;
+    height: 25em;
+    margin: 10px 10px;
+    border: solid;
+    border-color: black;
+    border-radius: 10px 10px 3px 3px;
 
 }
 
 a {
-    color: #4c68ba;
+    color: var(--color-link);
     font-weight: bold; 
 
 }
@@ -27,6 +48,10 @@ ul {
     list-style-type: none;                
 }
 nav {
-    text-align: center;
-    text-decoration: underline;
+    text-align: right;
+}
+
+nav > a{
+    color: white;
+    text-align: right;
 }
