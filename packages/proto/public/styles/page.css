@@ -1,57 +1,100 @@
-header{
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    background-color: black;
-    color: white;
+header {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	background-color: black;
+	color: white;
+	font-family: "Chelsea Market", system-ui;
+	font-weight: 400;
+  font-style: normal;
+
 }
 
+svg.icon{
+	display:inline;
+	height:2em;
+	width:2em;
+	vertical-align:top;
+	fill:currentColor;
 
-h1 { 
-    color: white;
-    padding: 0px var(--size-spacing-large);
+}
+
+.grouped_head {
+	display: flex;
+	align-items: baseline;
+}
+
+h1 {
+	color: white;
+	padding: 0px var(--size-spacing-large);
 }
 
 h2 {
-    padding: 0px var(--size-spacing-xlarge);
+	padding: 0px var(--size-spacing-xlarge);
 }
+
 
 .song {
-    width: fit-content;
-    border-color: blue;
-    padding: var(--size-spacing-small);
-    margin: var(--size-spacing-small);
-    text-align: center;
+	width: fit-content;
+	border-color: blue;
+	padding: var(--size-spacing-small);
+	margin: var(--size-spacing-small);
+	text-align: center;
 }
-body {
-    /*"Lucida Console", "Courier New", "monospace";*/
-    background-color: #FFFFC2;
 
-}
-.box{
-    width: 45em;
-    height: 25em;
-    margin: 10px 10px;
-    border: solid;
-    border-color: black;
-    border-radius: 10px 10px 3px 3px;
+body {
+	/*"Lucida Console", "Courier New", "monospace";*/
+	background-color: #FFFFC2;
+	font-family: "Special Elite", "monospace";
+	font-weight: 400;
+	font-style: normal;
 
 }
 
 a {
-    color: var(--color-link);
-    font-weight: bold; 
+	color: var(--color-link);
+	font-weight: bold;
+	text-decoration: none;
+}
 
+.songs {
+	display: flex;
+	flex-wrap: wrap;
+	width: fit-content;
+	margin: var(--size-spacing-small);
+	padding: var(--size-spacing-small);
+
+	&>* {
+		/*any descendant of songs is affected by this*/
+		width: fit-content;
+		flex-grow: 1;
+
+		@media screen and (max-width: 30rem) {
+			/*this rules applies up to max width of 30em*/
+			flex-basis: auto;
+		}
+	}
+
+}
+
+.song {
+	border-color: blue;
+	border: solid;
+	padding: var(--size-spacing-small);
+	margin: var(--size-spacing-small);
+	text-align: center;
 }
 
 ul {
-    list-style-type: none;                
-}
-nav {
-    text-align: right;
+	list-style-type: none;
 }
 
-nav > a{
-    color: white;
-    text-align: right;
+nav {
+	text-align: right;
+	margin: var(--size-spacing-medium);
+}
+
+nav>a {
+	color: white;
+	text-align: right;
 }

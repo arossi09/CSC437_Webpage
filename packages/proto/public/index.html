@@ -1,48 +1,87 @@
 <!DOCTYPE html>
-<html>  
-    <head>
-        <title>
-            
-        </title>
-        <link rel="stylesheet" href="styles/reset.css">
-        <link rel="stylesheet" href="styles/tokens.css">
-        <link rel="stylesheet" href="styles/page.css">
-    </head>
-    <body >
-        <header>
-        <h1> Songs</h1>
-        <nav>
-            <a href="instrument.html">Instruments</a>
-            <a href="genre_list.html">Genres</a>
-            <a href="difficulty_list.html">Difficulties</a>
-            <a href="index.html">Songs</a>
-        </nav>
-        </header>
-        <hr>
-   
-        <ul>
-            <li class="song">
-                <a href="song.html">Halfright</a> by 
-                <a href="band.html">Heatmiser</a> (Tags: 
-                <a href="difficulty.html">Intermediate</a>,
-                <a href="genre.html">Alternative/Indie</a>)
-            </li>
+<html lang="en">
+	<head>
+		<title>
+		</title>
+		<meta charset="utf-8">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Special+Elite&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="styles/reset.css">
+		<link rel="stylesheet" href="styles/tokens.css">
+		<link rel="stylesheet" href="styles/page.css">
+	</head>
+	<body>
+		<header>
+			<h1>
+				Songs
+			</h1>
+			<nav>
+				<a href="instrument.html">Instruments</a>
+				<a href="genre_list.html">Genres</a>
+				<a href="difficulty_list.html">Difficulties</a>
+				<a href="index.html">Songs</a>
+			</nav>
+		</header>
+		<hr>
 
-            <li class="song">
-                <a href="song.html">Halfright</a> by 
-                <a href="band.html">Heatmiser</a> (Tags: 
-                <a href="difficulty.html">Intermediate</a>,
-                <a href="genre.html">Alternative/Indie</a>)
-            </li>
-            <li class="song">
-                <a href="song.html">Halfright</a> by 
-                <a href="band.html">Heatmiser</a> (Tags: 
-                <a href="difficulty.html">Intermediate</a>,
-                <a href="genre.html">Alternative/Indie</a>)
-            </li>
+		<ul class="songs">
 
-        </ul>
+			<li class="song">
+				<svg class="icon">
+					<use href="/icons/instruments.svg#icon-guitar"/>
+				</svg>
 
-    </body>
+				<a href="song.html">Halfright</a>
+				by
+				<a href="band.html">Heatmiser</a>
+				(Tags:
+				<a href="difficulty.html">Intermediate</a>,
+				<a href="genre.html">Alternative/Indie</a>)
+			</li>
+
+			<li class="song">
+
+				<svg class="icon">
+					<use href="/icons/instruments.svg#icon-guitar"/>
+				</svg>
+
+				<svg class="icon">
+					<use href="/icons/instruments.svg#icon-bass"/>
+				</svg>
+				Everlong by Foo Fighters
+				(Tags: Advanced, Rock)
+			</li>
+
+			<li class="song">
+
+				<svg class="icon">
+					<use href="/icons/instruments.svg#icon-guitar"/>
+				</svg>
+				Between the Bars by Elliott Smith
+				(Tags: Intermediate, Acoustic)
+			</li>
+
+			<li class="song">
+				<svg class="icon">
+					<use href="/icons/instruments.svg#icon-guitar"/>
+				</svg>
+
+				<svg class="icon">
+					<use href="/icons/instruments.svg#icon-bass"/>
+				</svg>
+				Reptilia by The Strokes
+				(Tags: Intermediate, Garage Rock)
+			</li>
+
+			<li class="song">
+				<svg class="icon">
+					<use href="/icons/instruments.svg#icon-guitar"/>
+				</svg>
+
+				Fade Into You by Mazzy Star
+				(Tags: Beginner, Dream Pop)
+			</li>
+		</ul>
+	</body>
 </html>
-
