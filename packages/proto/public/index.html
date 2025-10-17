@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="styles/tokens.css">
 		<link rel="stylesheet" href="styles/page.css">
 	</head>
-	<body>
+	<body class="page">
 		<header>
 			<h1>
 				Songs
@@ -23,65 +23,86 @@
 				<a href="index.html">Songs</a>
 			</nav>
 		</header>
-		<hr>
+		<main>
+			<h2>
+				list
+			</h2>
+			<ul class="songs">
+				<li class="song">
+					<svg class="icon">
+						<use href="/icons/instruments.svg#icon-guitar"/>
+					</svg>
+					<a href="song.html">Halfright</a>
+					by
+					<a href="band.html">Heatmiser</a>
+					(Tags:
+					<a href="difficulty.html">Intermediate</a>,
+					<a href="genre.html">Alternative/Indie</a>)
+				</li>
 
-		<ul class="songs">
+				<li class="song">
+					<svg class="icon">
+						<use href="/icons/instruments.svg#icon-guitar"/>
+					</svg>
+					<svg class="icon">
+						<use href="/icons/instruments.svg#icon-bass"/>
+					</svg>
+					Everlong by Foo Fighters
+					(Tags: Advanced, Rock)
+				</li>
 
-			<li class="song">
-				<svg class="icon">
-					<use href="/icons/instruments.svg#icon-guitar"/>
-				</svg>
+				<li class="song">
+					<svg class="icon">
+						<use href="/icons/instruments.svg#icon-guitar"/>
+					</svg>
+					Between the Bars by Elliott Smith
+					(Tags: Intermediate, Acoustic)
+				</li>
 
-				<a href="song.html">Halfright</a>
-				by
-				<a href="band.html">Heatmiser</a>
-				(Tags:
-				<a href="difficulty.html">Intermediate</a>,
-				<a href="genre.html">Alternative/Indie</a>)
-			</li>
+				<li class="song">
+					<svg class="icon">
+						<use href="/icons/instruments.svg#icon-guitar"/>
+					</svg>
+					<svg class="icon">
+						<use href="/icons/instruments.svg#icon-bass"/>
+					</svg>
+					Reptilia by The Strokes
+					(Tags: Intermediate, Garage Rock)
+				</li>
 
-			<li class="song">
+				<li class="song">
+					<svg class="icon">
+						<use href="/icons/instruments.svg#icon-guitar"/>
+					</svg>
+					Fade Into You by Mazzy Star
+					(Tags: Beginner, Dream Pop)
+				</li>
 
-				<svg class="icon">
-					<use href="/icons/instruments.svg#icon-guitar"/>
-				</svg>
 
-				<svg class="icon">
-					<use href="/icons/instruments.svg#icon-bass"/>
-				</svg>
-				Everlong by Foo Fighters
-				(Tags: Advanced, Rock)
-			</li>
 
-			<li class="song">
+			</ul>
+		</main>
+		<section class="saved">
+			<h2>
+				Saved
+			</h2>
+			<ul>
 
-				<svg class="icon">
-					<use href="/icons/instruments.svg#icon-guitar"/>
-				</svg>
-				Between the Bars by Elliott Smith
-				(Tags: Intermediate, Acoustic)
-			</li>
-
-			<li class="song">
-				<svg class="icon">
-					<use href="/icons/instruments.svg#icon-guitar"/>
-				</svg>
-
-				<svg class="icon">
-					<use href="/icons/instruments.svg#icon-bass"/>
-				</svg>
-				Reptilia by The Strokes
-				(Tags: Intermediate, Garage Rock)
-			</li>
-
-			<li class="song">
-				<svg class="icon">
-					<use href="/icons/instruments.svg#icon-guitar"/>
-				</svg>
-
-				Fade Into You by Mazzy Star
-				(Tags: Beginner, Dream Pop)
-			</li>
-		</ul>
+				<li class="song">
+					<svg class="icon">
+						<use href="/icons/instruments.svg#icon-guitar"/>
+					</svg>
+					<a href="song.html">Halfright</a>
+					by
+					<a href="band.html">Heatmiser</a>
+				</li>
+				<li class="song">
+					<svg class="icon">
+						<use href="/icons/instruments.svg#icon-guitar"/>
+					</svg>
+					Fade Into You by Mazzy Star
+				</li>
+			</ul>
+		</section>
 	</body>
 </html>
