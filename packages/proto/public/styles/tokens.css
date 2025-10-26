@@ -1,5 +1,8 @@
 :root {
     --color-link: rgb(76, 104, 186);
+		--color-background-page: rgb(255, 255, 194);
+		--color-text: black;
+		--color-song-card: lightgrey;
 
     --size-spacing-small: 0.25rem;
     --size-spacing-medium: 0.5rem;
@@ -7,4 +10,12 @@
     --size-spacing-xlarge: 2rem;
 
 
+}
+body.dark-mode{
+	--color-background-page: rgb(20, 20, 20);
+	--color-text: rgb(173, 173, 212);
+
+	--color-song-card: rgb(73, 73, 109);
+	--color-link: rgb(186, 214, 214);
+	
 }

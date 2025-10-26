@@ -10,6 +10,18 @@
 		<link rel="stylesheet" href="styles/reset.css">
 		<link rel="stylesheet" href="styles/tokens.css">
 		<link rel="stylesheet" href="styles/page.css">
+		<script>
+			//custom event thats dispatched on call
+			function toggleDarkMode(target, checked){
+				const customEvent = new CustomEvent(
+					"dark-mode:toggle", {
+						bubbles: true,
+						detail: {checked},
+					});
+
+				target.dispatchEvent(customEvent);
+			}
+		</script>
 	</head>
 	<body class="page">
 		<header>
@@ -22,6 +34,17 @@
 				<a href="difficulty_list.html">Difficulties</a>
 				<a href="index.html">Songs</a>
 			</nav>
+			<label onchange="event.stopPropagation();  toggleDarkMode(document.body, event.target.checked);">
+				<input type="checkbox" autocomplete="off">
+				Dark Mode
+			</label>
+			<script>
+				const page = document.body;
+				page.addEventListener("dark-mode:toggle", (event) => {
+					const checked = event.detail.checked;
+					page.classList.toggle("dark-mode", checked);
+					});
+			</script>
 		</header>
 		<main>
 			<h2>
@@ -77,9 +100,6 @@
 					Fade Into You by Mazzy Star
 					(Tags: Beginner, Dream Pop)
 				</li>
-
-
-
 			</ul>
 		</main>
 		<section class="saved">

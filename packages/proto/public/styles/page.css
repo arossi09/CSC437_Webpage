@@ -7,6 +7,8 @@ svg.icon {
 
 }
 
+
+
 code {
 
 	font-family: "Syne Mono", "monospace";
@@ -66,10 +68,11 @@ h2 {
 
 body {
 	/*"Lucida Console", "Courier New", "monospace";*/
-	background-color: #FFFFC2;
+	background-color: var(--color-background-page);
 	font-family: "Special Elite", "monospace";
 	font-weight: 400;
 	font-style: normal;
+	color: var(--color-text);
 
 }
 
@@ -110,7 +113,7 @@ a {
 .song {
 	border: solid;
 	border-style: ridge;
-	background-color: lightgrey;
+	background-color: var(--color-song-card);
 	padding: var(--size-spacing-small);
 	margin: var(--size-spacing-small);
 	text-align: center; 
