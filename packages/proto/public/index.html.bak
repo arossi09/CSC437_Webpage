@@ -10,17 +10,27 @@
 		<link rel="stylesheet" href="styles/reset.css">
 		<link rel="stylesheet" href="styles/tokens.css">
 		<link rel="stylesheet" href="styles/page.css">
+
+		<script type="module">
+			import {define} from "@calpoly/mustang";
+			import {SongCardElement} from "/src/songcard.ts";
+			
+			define({
+				"song-card": SongCardElement
+				});
+		</script>
+
 		<script>
 			//custom event thats dispatched on call
 			function toggleDarkMode(target, checked){
 				const customEvent = new CustomEvent(
-					"dark-mode:toggle", {
-						bubbles: true,
-						detail: {checked},
+				"dark-mode:toggle", {
+					bubbles: true,
+					detail: {checked},
 					});
-
-				target.dispatchEvent(customEvent);
-			}
+					
+					target.dispatchEvent(customEvent);
+				}
 		</script>
 	</head>
 	<body class="page">
@@ -51,6 +61,8 @@
 				list
 			</h2>
 			<ul class="songs">
+				<song-card>
+				</song-card>
 				<li class="song">
 					<svg class="icon">
 						<use href="/icons/instruments.svg#icon-guitar"/>
