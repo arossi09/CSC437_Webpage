@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>
+		</title>
+		<meta charset="utf-8">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Special+Elite&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="styles/reset.css">
+		<link rel="stylesheet" href="styles/tokens.css">
+		<link rel="stylesheet" href="styles/page.css">
+
+
+
+		<script>
+			//custom event thats dispatched on call
+			function toggleDarkMode(target, checked){
+				const customEvent = new CustomEvent(
+				"dark-mode:toggle", {
+					bubbles: true,
+					detail: {checked},
+					});
+					
+					target.dispatchEvent(customEvent);
+				}
+		</script>
+		<script type="module" crossorigin src="/assets/index-D9PvWwc4.js"></script>
+	</head>
+	<body class="page">
+		<header>
+			<h1>
+				Songs
+			</h1>
+			<nav>
+				<a href="instrument.html">Instruments</a>
+				<a href="genre_list.html">Genres</a>
+				<a href="difficulty_list.html">Difficulties</a>
+				<a href="index.html">Songs</a>
+			</nav>
+			<label onchange="event.stopPropagation();  toggleDarkMode(document.body, event.target.checked);">
+				<input type="checkbox" autocomplete="off">
+				Dark Mode
+			</label>
+			<script>
+				const page = document.body;
+				page.addEventListener("dark-mode:toggle", (event) => {
+					const checked = event.detail.checked;
+					page.classList.toggle("dark-mode", checked);
+					});
+			</script>
+		</header>
+		<main>
+			<h2>
+				list
+			</h2>
+			<song-list src="/data/songs.json">
+			</song-list>
+
+		</main>
+		<section class="saved">
+			<h2>
+				Saved
+			</h2>
+			<ul>
+
+				<li class="song">
+					<svg class="icon">
+						<use href="/icons/instruments.svg#icon-guitar"/>
+					</svg>
+					<a href="song.html">Halfright</a>
+					by
+					<a href="band.html">Heatmiser</a>
+				</li>
+				<li class="song">
+					<svg class="icon">
+						<use href="/icons/instruments.svg#icon-guitar"/>
+					</svg>
+					Fade Into You by Mazzy Star
+				</li>
+			</ul>
+		</section>
+	</body>
+</html>

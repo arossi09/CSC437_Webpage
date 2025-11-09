@@ -1,0 +1,35 @@
+{
+    "songCards": [
+        {
+            "title": "Halfright",
+            "artist": "Heatmiser",
+            "difficulty": "Intermediate",
+            "genre": "Alternative/Indie",
+            "song_link": "song.html",
+            "artist_link": "band.html",
+            "difficulty_link": "difficulty.html",
+            "genre_link": "genre.html"
+        },
+        {
+            "title": "Happiness",
+            "artist": "Elliott Smith",
+            "difficulty": "Intermediate",
+            "genre": "Acoustic",
+            "artist_link": "artist.html",
+            "difficulty_link": "difficulty.html"
+        },
+        {
+            "title": "Happy Again",
+            "artist": "Chet Atkins",
+            "difficulty": "Advanced",
+            "genre": "Classic Country"
+        },
+        {
+            "title": "Rebel Rebel",
+            "artist": "David Bowie",
+            "difficulty": "Easy",
+            "genre": "Alternative/Indie",
+            "genre_link": "genre.html"
+        }
+    ]
+}
