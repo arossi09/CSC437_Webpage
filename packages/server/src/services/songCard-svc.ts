@@ -21,6 +21,7 @@ function index(): Promise<songCard[]> {
 	return songCardModel.find();
 }
 
+//used to get a json from songcard title
 function get(title: String): Promise<songCard> {
 	return songCardModel
 		.find({ title })
@@ -30,4 +31,28 @@ function get(title: String): Promise<songCard> {
 		});
 }
 
-export default { index, get };
+//used to create a new songCard via json
+function create(json: songCard): Promise<songCard> {
+	const t = new songCardModel(json);
+	return t.save();
+}
+
+//used to update a songcard in database
+function update(title: String, songcard: songCard): Promise<songCard> {
+	return songCardModel
+		.findOneAndUpdate({ title }, songcard, {
+			new: true,
+		})
+		.then((updated) => {
+			if (!updated) throw `${title} not updated`;
+			else return updated as songCard;
+		});
+}
+
+function remove(title: String): Promise<void> {
+	return songCardModel.findOneAndDelete({ title }).then((deleted) => {
+		if (!deleted) throw `${title} not deleted`;
+	});
+}
+
+export default { index, get, create, update, remove };
