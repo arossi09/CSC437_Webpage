@@ -9,7 +9,9 @@ const router = express.Router();
 router.get("/", (_, res: Response) => {
 	songCards
 		.index()
-		.then((list: songCard[]) => res.json(list))
+		.then((list: songCard[]) =>
+			res.json({ /*this might not be right*/ songCards: list }),
+		)
 		.catch((err) => res.status(500).send(err));
 });
 

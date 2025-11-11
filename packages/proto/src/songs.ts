@@ -1,4 +1,5 @@
 import { html, css, LitElement } from "lit";
+import { Auth, Observer } from "@calpoly/mustang";
 import { state, property } from "lit/decorators.js";
 import reset from "./styles/reset.css.ts";
 
@@ -19,13 +20,27 @@ export class SongElement extends LitElement {
 	@state()
 	songCards: Array<songCard> = [];
 
+	_authObserver = new Observer<Auth.Model>(this, "tabs:auth");
+	_user?: Auth.User;
+
+	get authorization() {
+		if (this._user?.authenticated)
+			return {
+				Authorization: `Bearer ${(this._user as Auth.AuthenticatedUser).token}`,
+			};
+		return undefined;
+	}
+
 	connectedCallback() {
 		super.connectedCallback();
-		if (this.src) this.hydrate(this.src);
+		this._authObserver.observe((auth: Auth.Model) => {
+			this._user = auth.user;
+			if (this.src) this.hydrate(this.src);
+		});
 	}
 
 	hydrate(src: string) {
-		fetch(src)
+		fetch(src, { headers: this.authorization })
 			.then((res) => res.json())
 			.then((json: object) => {
 				if (json) {
@@ -56,6 +71,9 @@ export class SongElement extends LitElement {
 		}
 		return html`
 			<ul class="songs">
+				<h2>
+					list
+				</h2>
 				${songCards.map(renderSongCards)}
 			</ul>
 		`;
@@ -64,10 +82,16 @@ export class SongElement extends LitElement {
 	static styles = [
 		reset.styles,
 		css`
+		:host {
+      display: contents;
+    }
 
+    
 .songs {
 	display: grid;
-	grid-template-columns: [start] 1fr 1fr 1fr[end];
+
+
+	grid-column-end: span 2;
 	margin: var(--size-spacing-small);
 	padding: var(--size-spacing-small);
 

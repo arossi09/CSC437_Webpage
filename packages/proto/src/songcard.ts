@@ -34,6 +34,9 @@ export class SongCardElement extends LitElement {
 	static styles = [
 		reset.styles,
 		css`
+			:host {
+        display: contents;
+      }
 			svg.icon {
 				display: inline;
 				height: 2em;
