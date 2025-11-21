@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>
+		</title>
+		<meta charset="utf-8">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Special+Elite&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="/styles/reset.css">
+		<link rel="stylesheet" href="/styles/tokens.css">
+		<link rel="stylesheet" href="/styles/page.css">
+		<script type="module" src="/src/main.ts"></script>
+	</head>
+	<body>
+		<mu-history provides="goodtabs:history" root="/app/">
+			<mu-auth provides="goodtabs:auth" redirect="/login.html">
+				<goodtabs-header>
+				</goodtabs-header>
+				<mu-switch></mu-switch>
+			</mu-auth>
+		</mu-history>
+	</body>
+</html>

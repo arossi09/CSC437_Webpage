@@ -15,8 +15,9 @@ const songCardSchema = new Schema<songCard>(
 	{ collection: "song_cards" },
 );
 
-const songCardModel = model<songCard>("Song", songCardSchema);
+const songCardModel = model<songCard>("songCard", songCardSchema);
 
+//TODO export model as favorites too 
 function index(): Promise<songCard[]> {
 	return songCardModel.find();
 }

@@ -1,0 +1,141 @@
+svg.icon {
+	display: inline;
+	height: 2em;
+	width: 2em;
+	vertical-align: top;
+	fill: currentColor;
+
+}
+
+
+
+code {
+
+	font-family: "Syne Mono", "monospace";
+	font-weight: 400;
+	font-style: normal;
+
+}
+
+.page {
+	display: grid;
+	grid-template-columns: [start] 1fr 1fr 1fr 1fr[end];
+
+
+	@media screen and (max-width: 30rem) {
+
+		/*this rules applies up to max width of 30em*/
+		display: block;
+		flex-basis: auto;
+	}
+}
+
+header {
+	flex-basis: min-content;
+	grid-column: start/end;
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	background-color: black;
+	color: white;
+	font-family: "Chelsea Market", system-ui;
+	font-weight: 400;
+	font-style: normal;
+
+}
+
+.page>main {
+	grid-column-end: span 2;
+}
+
+
+
+.grouped_head {
+	display: flex;
+	align-items: baseline;
+}
+
+h1 {
+	color: white;
+	padding: 0px var(--size-spacing-large);
+}
+
+h2 {
+	padding: var(--size-spacing-medium);
+}
+
+
+
+body {
+	/*"Lucida Console", "Courier New", "monospace";*/
+	background-color: var(--color-background-page);
+	font-family: "Special Elite", "monospace";
+	font-weight: 400;
+	font-style: normal;
+	color: var(--color-text);
+
+}
+
+a {
+	color: var(--color-link);
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.songs {
+	display: grid;
+	grid-template-columns: [start] 1fr 1fr 1fr[end];
+	margin: var(--size-spacing-small);
+	padding: var(--size-spacing-small);
+
+	@media screen and (max-width: 30rem) {
+		/*this rules applies up to max width of 30em*/
+		display: flex;
+		flex-wrap: wrap;
+		flex-basis: auto;
+	}
+
+	&>* {
+
+		/*flex-grow: 1;*/
+		/*any descendant of songs is affected by this*/
+
+		@media screen and (max-width: 30rem) {
+
+			/*this rules applies up to max width of 30em*/
+			display: flex;
+			flex-basis: auto;
+		}
+	}
+
+}
+
+.song {
+	border: solid;
+	border-style: ridge;
+	background-color: var(--color-song-card);
+	padding: var(--size-spacing-small);
+	margin: var(--size-spacing-small);
+	text-align: center; 
+}
+
+.saved {
+	grid-column-start: 4;
+}
+
+ul {
+	list-style-type: none;
+
+	padding: var(--size-spacing-small);
+	margin: var(--size-spacing-small);
+}
+
+nav {
+	text-align: right;
+	margin: var(--size-spacing-medium);
+}
+
+nav>a {
+	color: white;
+	text-align: right;
+}
