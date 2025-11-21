@@ -21,5 +21,10 @@ export class TabSheetElement extends LitElement {
       </div>		`;
 	}
 
-	static styles = [css``];
+	static styles = [css`
+
+			:host {
+        display: contents;
+      }
+		`];
 }

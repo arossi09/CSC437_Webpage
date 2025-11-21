@@ -50,7 +50,6 @@ export class SongViewElement extends LitElement {
           ${this.song.bpm ? html`<p>BPM: ${this.song.bpm}</p>` : ""}
         </header>
 
-        <!-- Sections -->
         <section class="sections">
           ${this.song.sections?.map(
             (s: any) =>
@@ -61,7 +60,6 @@ export class SongViewElement extends LitElement {
           )}
         </section>
 
-        <!-- Chords -->
         <section class="chords">
           ${this.song.chords?.map(
             (c: any) =>
@@ -73,7 +71,6 @@ export class SongViewElement extends LitElement {
           )}
         </section>
 
-        <!-- Tabs -->
         <section class="tabs">
           ${this.song.tabs?.map(
             (t: any) =>

@@ -19,7 +19,12 @@ export class SongSectionElement extends LitElement {
 	}
 
 	static styles = [
-		css ``
+		css `
+
+			:host {
+        display: contents;
+      }
+		`
 	];
 }
 

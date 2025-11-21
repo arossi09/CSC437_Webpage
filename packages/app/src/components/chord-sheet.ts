@@ -29,7 +29,12 @@ export class ChordSheetElement extends LitElement {
 	}
 
 	static styles = [
-		css ``
+		css `
+
+			:host {
+        display: contents;
+      }
+		`
 	];
 }
 
