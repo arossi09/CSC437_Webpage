@@ -18,7 +18,7 @@ app.use(express.static(staticDir));
 app.use(express.json());
 
 app.use("/auth", auth);
-app.use("/api/songcards", authenticationUser, songcards);
+app.use("/api/songcards",  songcards);
 app.use("/api/songs", songs);
 
 app.use("/app", (_: Request, res: Response) => {

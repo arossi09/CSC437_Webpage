@@ -8,10 +8,7 @@ interface songCard {
 	artist: string;
 	difficulty: string;
 	genre: string;
-	song_link: string | undefined;
-	artist_link: string | undefined;
-	genre_link: string | undefined;
-	difficulty_link: string | undefined;
+	songId: string;
 }
 
 export class SongsElement extends LitElement {
@@ -62,10 +59,7 @@ export class SongsElement extends LitElement {
 				           artist=${songCard.artist}
 				           difficulty=${songCard.difficulty}
 				           genre=${songCard.genre}
-				           song_link=${songCard.song_link}
-				           artist_link=${songCard.artist_link}
-				           difficulty_link=${songCard.difficulty_link}
-				           genre_link=${songCard.genre_link}
+									 songId=${songCard.songId}
 				>
 				</song-card>
 		`;

@@ -5,6 +5,8 @@ import { ChordSheet } from "./chord-sheet";
 export interface Song {
 	title: string;
 	artist: string;
+	difficulty: string;
+	genre: string;
 	key?: string;
 	bpm?: number;
 	sections: Array<SongSection>;

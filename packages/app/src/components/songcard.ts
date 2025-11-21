@@ -9,7 +9,7 @@ export class SongCardElement extends LitElement {
 	@property({ type: String }) artist = "";
 	@property({ type: String }) difficulty = "";
 	@property({ type: String }) genre = "";
-	@property({ type: String }) id = "";
+	@property({ type: String }) songId = "";
 	/*
 	@property({ type: String }) song_link = "";
 	@property({ type: String }) artist_link = "";
@@ -23,12 +23,12 @@ export class SongCardElement extends LitElement {
 					<svg class="icon">
 						<use href="/icons/instruments.svg#icon-guitar"/>
 					</svg>
-					<a href="/app/song/${this.id}">${this.title}</a>
+					<a href="/app/song/${this.songId}">${this.title}</a>
 					by
-					<a href="${this.artist_link}">${this.artist}</a>
+					${this.artist}
 					(Tags:
-					<a href="${this.difficulty_link}">${this.difficulty}</a>,
-					<a href="${this.genre_link}">${this.genre}</a>)
+					${this.difficulty},
+					${this.genre})
 				</li>
 
 		`;

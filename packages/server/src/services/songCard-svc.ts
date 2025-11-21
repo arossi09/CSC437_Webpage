@@ -7,17 +7,14 @@ const songCardSchema = new Schema<songCard>(
 		artist: { type: String, required: true, trim: true },
 		difficulty: { type: String, required: true },
 		genre: { type: String, required: true },
-		song_link: { type: String },
-		artist_link: { type: String },
-		genre_link: { type: String },
-		difficulty_link: { type: String },
+		songId: { type: String, required: true },
 	},
 	{ collection: "song_cards" },
 );
 
 const songCardModel = model<songCard>("songCard", songCardSchema);
 
-//TODO export model as favorites too 
+//TODO export model as favorites too
 function index(): Promise<songCard[]> {
 	return songCardModel.find();
 }
@@ -55,5 +52,5 @@ function remove(title: String): Promise<void> {
 		if (!deleted) throw `${title} not deleted`;
 	});
 }
-
+export { songCardModel };
 export default { index, get, create, update, remove };
