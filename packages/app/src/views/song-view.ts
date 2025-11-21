@@ -1,11 +1,14 @@
-import { define } from "@calpoly/mustang";
-import { css, html, LitElement } from "lit";
+import { define, View } from "@calpoly/mustang";
+import { css, html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { TabSheetElement } from "../components/tab-sheet";
 import { ChordSheetElement } from "../components/chord-sheet";
 import { SongSectionElement } from "../components/song-section";
+import { Song } from "server/models";
+import { Msg } from "../messages";
+import { Model } from "../model";
 
-export class SongViewElement extends LitElement {
+export class SongViewElement extends View<Model, Msg> {
 	static uses = define({
 		"tab-sheet": TabSheetElement,
 		"chord-sheet": ChordSheetElement,
@@ -13,30 +16,25 @@ export class SongViewElement extends LitElement {
 	});
 
 	@property({ attribute: "song-id" })
-	songId = "";
+	songId?: string;
 
 	@state()
-	song?: any;
+	get song(): Song | undefined {
+		return this.model.song;
+	}
+	
+	constructor() {
+    super("goodtabs:model");
+  }
 
-	connectedCallback() {
-		super.connectedCallback();
-		this.hydrate();
+
+	attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+		super.attributeChangedCallback(name, oldValue, newValue);
+		if (name === "song-id" && oldValue !== newValue && newValue) {
+			this.dispatchMessage(["song/request", { songid: newValue }]);
+		}
 	}
 
-	get src() {
-		return `/api/songs/${this.songId}`;
-	}
-
-	hydrate() {
-		fetch(this.src)
-			.then((res) => res.json())
-			.then((json) => {
-				this.song = json;
-			})
-			.catch((err) => {
-				console.error("Failed to fetch song:", err);
-			});
-	}
 
 	render() {
 		if (!this.song) return html`<p> Loading song</p>`;
@@ -52,34 +50,34 @@ export class SongViewElement extends LitElement {
 
         <section class="sections">
           ${this.song.sections?.map(
-            (s: any) =>
-              html`<song-section
+			(s: any) =>
+				html`<song-section
                 .type=${s.type}
                 .lyrics=${s.lyrics}
-              ></song-section>`
-          )}
+              ></song-section>`,
+		)}
         </section>
 
         <section class="chords">
           ${this.song.chords?.map(
-            (c: any) =>
-              html`<chord-sheet
+			(c: any) =>
+				html`<chord-sheet
                 .section=${c.section}
                 .chords=${c.chords}
                 .inline=${c.inline || false}
-              ></chord-sheet>`
-          )}
+              ></chord-sheet>`,
+		)}
         </section>
 
         <section class="tabs">
           ${this.song.tabs?.map(
-            (t: any) =>
-              html`<tab-sheet
+			(t: any) =>
+				html`<tab-sheet
                 .instrument=${t.instrument}
                 .section=${t.section}
                 .tabBody=${t.tabBody}
-              ></tab-sheet>`
-          )}
+              ></tab-sheet>`,
+		)}
         </section>
       </main>
 		`;

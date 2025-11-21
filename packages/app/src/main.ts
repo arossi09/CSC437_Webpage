@@ -1,11 +1,13 @@
-import { Auth, define, History, Switch } from "@calpoly/mustang";
+import { Auth, History, Switch, Store, define } from "@calpoly/mustang";
 import { html } from "lit";
+import { Msg } from "./messages";
+import { Model, init } from "./model";
+import update from "./update";
 import { HeaderElement } from "./components/header";
 import { HomeViewElement } from "./views/home-view";
 import { SongViewElement } from "./views/song-view";
 import { SongCardElement } from "./components/songcard";
 import { SongsElement } from "./components/songs";
-
 
 const routes = [
 	{
@@ -34,10 +36,16 @@ define({
 	"home-view": HomeViewElement,
 	"song-card": SongCardElement,
 	"song-list": SongsElement,
-	"song-view": SongViewElement,
 	"mu-switch": class AppSwitch extends Switch.Element {
 		constructor() {
 			super(routes, "goodtabs:history", "goodtabs:auth");
 		}
 	},
+	"mu-store": class AppStore extends Store.Provider<Model, Msg> {
+		constructor() {
+			super(update, init, "goodtabs:auth");
+		}
+	},
+
+	"song-view": SongViewElement,
 });

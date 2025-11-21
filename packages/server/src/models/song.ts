@@ -3,6 +3,7 @@ import { TabSheet } from "./tab-sheet";
 import { ChordSheet } from "./chord-sheet";
 
 export interface Song {
+	songid: string;
 	title: string;
 	artist: string;
 	difficulty: string;

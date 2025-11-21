@@ -15,9 +15,11 @@
 	<body>
 		<mu-history provides="goodtabs:history" root="app/">
 			<mu-auth provides="goodtabs:auth" redirect="/login.html">
+				<mu-store provides="goodtabs:model">
 				<goodtabs-header>
 				</goodtabs-header>
 				<mu-switch></mu-switch>
+				</mu-store>
 			</mu-auth>
 		</mu-history>
 	</body>
