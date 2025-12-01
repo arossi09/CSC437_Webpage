@@ -23,9 +23,28 @@ router.post("/", (req: Request, res: Response) => {
 	const newSong = req.body;
 
 	songs
-	.create(newSong)
-	.then((song: Song) => res.status(201).json(song))
-	.catch((err) => res.status(500).send(err));
+		.create(newSong)
+		.then((song: Song) => res.status(201).json(song))
+		.catch((err) => res.status(500).send(err));
+});
+
+router.put("/:id", (req: Request, res: Response) => {
+	const { id } = req.params;
+	const newSong = req.body;
+
+	songs
+		.update(id, newSong)
+		.then((song: Song) => res.json(song))
+		.catch((err) => res.status(404).end());
+});
+
+router.delete("/:id", (req: Request, res: Response) => {
+	const { id } = req.params;
+
+	songs
+		.remove(id)
+		.then(() => res.status(204).end())
+		.catch((err) => res.status(404).send(err));
 });
 
 export default router;

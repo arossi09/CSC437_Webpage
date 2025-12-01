@@ -4,12 +4,19 @@ import { Msg } from "./messages";
 import { Model, init } from "./model";
 import update from "./update";
 import { HeaderElement } from "./components/header";
-import { HomeViewElement } from "./views/home-view";
-import { SongViewElement } from "./views/song-view";
 import { SongCardElement } from "./components/songcard";
 import { SongsElement } from "./components/songs";
+import { HomeViewElement } from "./views/home-view";
+import { SongViewElement } from "./views/song-view";
+import { SongEditElement } from "./views/song-edit";
 
 const routes = [
+	{
+		path: "/app/song/:id/edit",
+		view: (params: Switch.Params) => html`
+			<song-edit song-id=${params.id}></song-edit>
+		`,
+	},
 	{
 		path: "/app/song/:id",
 		view: (params: Switch.Params) => html`
@@ -28,6 +35,7 @@ const routes = [
 		redirect: "/app",
 	},
 ];
+
 
 define({
 	"mu-auth": Auth.Provider,
@@ -48,4 +56,7 @@ define({
 	},
 
 	"song-view": SongViewElement,
+	"song-edit": SongEditElement,
 });
+
+HeaderElement.initializeOnce();

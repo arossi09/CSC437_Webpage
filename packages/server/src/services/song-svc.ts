@@ -1,6 +1,6 @@
 import { Document, Model, Schema, model } from "mongoose";
 import { Song } from "../models";
-import {songCardModel} from "../services/songCard-svc";
+import { songCardModel } from "../services/songCard-svc";
 
 const songSchema = new Schema<Song>(
 	{
@@ -25,7 +25,7 @@ const songSchema = new Schema<Song>(
 		],
 		tabs: [
 			{
-				instrument: String,
+				//instrument: String,
 				section: String,
 				tabBody: String,
 			},
@@ -40,7 +40,7 @@ function index(): Promise<Song[]> {
 	return songModel.find();
 }
 
-function get(id: String): Promise<Song> {
+function get(id: string): Promise<Song> {
 	return songModel.findById(id).then((doc) => {
 		if (!doc) throw `${id} Not Found`;
 		return doc;
@@ -64,4 +64,22 @@ function create(json: Song): Promise<Song> {
 	});
 }
 
-export default { index, get, create };
+//used to update a songcard in database
+function update(id: string, song: Song): Promise<Song> {
+	return songModel
+		.findByIdAndUpdate(id, song, {
+			new: true,
+		})
+		.then((updated) => {
+			if (!updated) throw `${id} not updated`;
+			else return updated as Song;
+		});
+}
+
+function remove(id: string): Promise<void> {
+	return songModel.findByIdAndDelete( id ).then((deleted) => {
+		if (!deleted) throw `${id} not deleted`;
+	});
+}
+
+export default { index, get, create, update, remove };

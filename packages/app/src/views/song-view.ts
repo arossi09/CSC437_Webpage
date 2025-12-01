@@ -44,8 +44,10 @@ export class SongViewElement extends View<Model, Msg> {
         <header>
           <h2>${this.song.title}</h2>
           <h3>${this.song.artist}</h3>
+					<h4>${this.song.difficulty}</h4>
           ${this.song.key ? html`<p>Key: ${this.song.key}</p>` : ""}
           ${this.song.bpm ? html`<p>BPM: ${this.song.bpm}</p>` : ""}
+					<a href="/app/song/${this.songId}/edit">Edit Song</a>
         </header>
 
         <section class="sections">
@@ -73,7 +75,7 @@ export class SongViewElement extends View<Model, Msg> {
           ${this.song.tabs?.map(
 			(t: any) =>
 				html`<tab-sheet
-                .instrument=${t.instrument}
+                <!-- .instrument=${t.instrument}-->
                 .section=${t.section}
                 .tabBody=${t.tabBody}
               ></tab-sheet>`,

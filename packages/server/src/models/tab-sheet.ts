@@ -1,5 +1,5 @@
 export interface TabSheet{
-	instrument: "guitar" | "base";
+	//instrument: "guitar" | "base";
 	section: string;
 	tabBody: string;
 }

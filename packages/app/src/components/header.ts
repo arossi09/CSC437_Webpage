@@ -4,6 +4,14 @@ import { html, css, LitElement } from "lit";
 import { state } from "lit/decorators.js";
 import reset from "../styles/reset.css";
 
+
+function toggleDarkMode(ev: InputEvent) {
+	const target = ev.target as HTMLInputElement;
+	const checked = target.checked;
+
+	Events.relay(ev, "dark-mode", { checked });
+}
+
 export class HeaderElement extends LitElement {
 	_authObserver = new Observer<Auth.Model>(this, "goodtabs:auth");
 
@@ -30,6 +38,7 @@ export class HeaderElement extends LitElement {
 	}
 
 	static initializeOnce() {
+
 		function toggleDarkMode(page: HTMLElement | null, checked: any) {
 			page?.classList.toggle("dark-mode", checked);
 		}
@@ -46,8 +55,8 @@ export class HeaderElement extends LitElement {
 		return html`
 			<button
 				@click=${(e: UIEvent) => {
-				Events.relay(e, "auth:message", ["auth/signout"]);
-			}}
+					Events.relay(e, "auth:message", ["auth/signout"]);
+				}}
 				>
 				Sign Out
 				</button>
@@ -64,71 +73,73 @@ export class HeaderElement extends LitElement {
 
 	render() {
 		return html`
-			<header>
-				<h1>
-					Songs
-				</h1>
-				<nav>
-					<a href="instrument.html">Instruments</a>
-					<a href="genre_list.html">Genres</a>
-					<a href="difficulty_list.html">Difficulties</a>
-					<a href="index.html">Songs</a>
-				</nav>
-				<label @change=${(event: Event) => Events.relay(event, "dark-mode", { checked: (event.target as HTMLInputElement)?.checked })}>
-				<input type= "checkbox" autocomplete = "off" >
-					Dark Mode
-						</label>
+		<header>
+		<h1>
+		GoodTabs
+		</h1>
+		<nav>
+	<!-- 
+		<a href="instrument.html">Instruments</a>
+		<a href="genre_list.html">Genres</a>
+		<a href="difficulty_list.html">Difficulties</a>
+		<a href="index.html">Songs</a>
+		-->
+		</nav>
 
+		<div class="grouped-header">
 		Hello, ${this.userid || "musician"}
 		${this.loggedIn ? this.renderSignOutButton() : this.renderSignInButton()}
-		<script>
-					const page = document.body;
-		page.addEventListener("dark-mode:toggle", (event) => {
-			const checked = event.detail.checked;
-			page.classList.toggle("dark-mode", checked);
-		});
-		</script>
-			</header>
+		<label @change=${toggleDarkMode}>
+		<input type="checkbox" />
+		Dark Mode
+		</label>		
+		</div>
+		</header>
 				`;
 	}
 
 	static styles = [
 		reset.styles,
 		css`
-		:host {
-	display: block;
-	grid-column: start / end;
-	width: 100%;
-}
+			:host {
+				display: block;
+				grid-column: start / end;
+				width: 100%;
+			}
 
-header {
-	flex-basis: min-content;
-	grid-column: start / end;
-	display: flex;
-	align-items: baseline;
-	justify-content: space-between;
-	background-color: black;
-	color: white;
-	font-family: "Chelsea Market", system-ui;
-	font-weight: 400;
-	font-style: normal;
-}
+			.grouped-header{
+				display:flex;
+				margin: 10 10;
+			}
 
-a {
-	color: var(--color-link);
-	font-weight: bold;
-	text-decoration: none;
-}
-nav {
-	text-align: right;
-	margin: var(--size-spacing-medium);
-}
+			header {
+				flex-basis: min-content;
+				grid-column: start / end;
+				display: flex;
+				align-items: baseline;
+				justify-content: space-between;
+				background-color: black;
+				color: white;
+				font-family: "Chelsea Market", system-ui;
+				font-weight: 400;
+				font-style: normal;
+			}
 
-nav > a {
-	color: white;
-	text-align: right;
-}
+			a {
+				color: var(--color-link);
+				font-weight: bold;
+				text-decoration: none;
+			}
+			nav {
+				text-align: right;
+				margin: var(--size-spacing-medium);
+			}
 
-		`,
+			nav > a {
+				color: white;
+				text-align: right;
+			}
+
+			`,
 	];
 }
