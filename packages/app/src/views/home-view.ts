@@ -10,6 +10,7 @@ export class HomeViewElement extends LitElement {
 				<h2>
 					Saved
 				</h2>
+				<!--
 				<ul>
 					<li class="song">
 						<svg class="icon">
@@ -26,6 +27,7 @@ export class HomeViewElement extends LitElement {
 						Fade Into You by Mazzy Star
 					</li>
 				</ul>
+				-->
 			</section>
 			</main>
 		`;

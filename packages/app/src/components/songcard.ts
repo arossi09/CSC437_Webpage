@@ -55,8 +55,8 @@ export class SongCardElement extends LitElement {
 				text-decoration: none;
 			}
 			.song{
-			border: solid;
-			border-style: ridge;
+			gap: var(--size-spacing-small);
+			border: 1px dotted;
 			background-color: var(--color-song-card);
 			padding: var(--size-spacing-small);
 			margin: var(--size-spacing-small);

@@ -83,8 +83,6 @@ export class SongsElement extends LitElement {
 
     
 .songs {
-	display: grid;
-
 
 	grid-column-end: span 2;
 	margin: var(--size-spacing-small);

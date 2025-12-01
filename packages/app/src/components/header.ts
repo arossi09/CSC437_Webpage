@@ -75,7 +75,7 @@ export class HeaderElement extends LitElement {
 		return html`
 		<header>
 		<h1>
-		GoodTabs
+		<a href="/app">GoodTabs</a>
 		</h1>
 		<nav>
 	<!-- 
@@ -118,11 +118,14 @@ export class HeaderElement extends LitElement {
 				display: flex;
 				align-items: baseline;
 				justify-content: space-between;
-				background-color: black;
+				background-color: var(--color-header);
 				color: white;
 				font-family: "Chelsea Market", system-ui;
 				font-weight: 400;
 				font-style: normal;
+			}
+			header > h1 > a{
+				color: white;
 			}
 
 			a {

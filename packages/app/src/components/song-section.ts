@@ -1,6 +1,6 @@
 import { html, css, LitElement } from "lit";
 import { property } from "lit/decorators.js";
-//import reset from "../styles/reset.css";
+import reset from "../styles/reset.css";
 
 export class SongSectionElement extends LitElement {
 	@property()
@@ -12,14 +12,15 @@ export class SongSectionElement extends LitElement {
 	override render() {
 		return html`
 			<section>
-				<h3>${this.type}</h3>
-				<p>${this.lyrics}</p>
+				<h4>[${this.type}]</h4>
+				<pre>${this.lyrics}</pre>
 			</section>
 		`;
 	}
 
 	static styles = [
-		css `
+		reset.styles,
+		css`
 
 			:host {
         display: contents;

@@ -62,6 +62,7 @@ export class SongEditElement extends View<Model, Msg> {
 				text-decoration: underline;
 			}
 			fieldset {
+				background-color: var(--color-song-card);
 				grid-column: 2 / 6;
 				display: grid;
 				grid-template-columns: subgrid;
@@ -92,7 +93,7 @@ export class SongEditElement extends View<Model, Msg> {
 						width: fit-content;
 						max-width: 200px;
 						padding: var(--size-spacing-small);
-						border: 1px solid var(--color-border, #ccc);
+						border: 1px dotted var(--color-border, #ccc);
 						border-radius: var(--size-radius-small, 4px);
 						font-size: 0.9rem;
 					}
@@ -372,7 +373,7 @@ export class SongEditElement extends View<Model, Msg> {
 
 		json.tabs = Array.from({ length: tabsCount }, (_, i) => ({
 			section: ex(`tab-${i}-type`),
-			chords: ex(`tab-${i}-tabBody`),
+			tabBody: ex(`tab-${i}-tabBody`),
 		}));
 
 		console.log("Reconstructed data:", json);
