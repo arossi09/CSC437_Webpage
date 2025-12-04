@@ -7,7 +7,7 @@ const songCardSchema = new Schema<songCard>(
 		artist: { type: String, required: true, trim: true },
 		difficulty: { type: String, required: true },
 		genre: { type: String, required: true },
-		//instrument: { type: String, required: true },
+		instrument: { type: String, required: true },
 		songId: { type: String, required: true },
 	},
 	{ collection: "song_cards" },

@@ -13,6 +13,8 @@ export class SongCardElement extends LitElement {
 	@property({ type: String }) instrument = "";
 
 	override render() {
+
+			console.log("Instrument value:", this.instrument);
 		return html`
 				<li class ="song">
 					<svg class="icon">

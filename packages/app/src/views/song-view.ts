@@ -35,12 +35,6 @@ export class SongViewElement extends View<Model, Msg> {
 		}
 	}
 
-
-	/*
-					<svg class="icon">
-					<use href="/icons/instruments.svg#icon-${this.song.instrument}"/>
-					</svg> ⋆
-					*/
 	render() {
 		if (!this.song) return html`<p> Loading song</p>`;
 
@@ -56,6 +50,9 @@ export class SongViewElement extends View<Model, Msg> {
           ${this.song.key ? html`<p>Key: ${this.song.key}</p>` : ""} ⋆
           ${this.song.bpm ? html`<p>BPM: ${this.song.bpm}</p>` : ""} ⋆
 
+					<svg class="icon">
+					<use href="/icons/instruments.svg#icon-${this.song.instrument}"/>
+					</svg> ⋆
 					<a href="/app/song/${this.songId}/edit">Edit Song</a>
 					</div>
         </header>

@@ -8,6 +8,7 @@ interface songCard {
 	artist: string;
 	difficulty: string;
 	genre: string;
+	instrument: string;
 	songId: string;
 }
 
@@ -59,6 +60,7 @@ export class SongsElement extends LitElement {
 				           artist=${songCard.artist}
 				           difficulty=${songCard.difficulty}
 				           genre=${songCard.genre}
+									 instrument=${songCard.instrument}
 									 songId=${songCard.songId}
 				>
 				</song-card>

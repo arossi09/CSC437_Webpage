@@ -7,8 +7,8 @@ const songSchema = new Schema<Song>(
 		title: { type: String, required: true, trim: true },
 		artist: { type: String, required: true, trim: true },
 		difficulty: { type: String, required: true, trim: true },
-		genre: { type: String, requried: true, trim: true },
-		//instrument: {type: String, required: true, trim: true},
+		genre: { type: String, required: true, trim: true },
+		instrument: {type: String, required: true, trim: true},
 		key: { type: String, required: false },
 		bpm: { type: String, required: false },
 		sections: [
@@ -58,7 +58,7 @@ function create(json: Song): Promise<Song> {
 			artist: savedSong.artist,
 			difficulty: savedSong.difficulty,
 			genre: savedSong.genre,
-			//icon: savedSong.instrument,
+			instrument: savedSong.instrument,
 			songId: savedSong._id.toString(), 
 		});
 
