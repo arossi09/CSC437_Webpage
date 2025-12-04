@@ -1,18 +1,15 @@
 import { define, Form, View, History } from "@calpoly/mustang";
-import { html, css } from "lit";
-import { property, state } from "lit/decorators.js";
+import { css, html } from "lit";
+import { state } from "lit/decorators.js";
 import { Song } from "server/models";
 import { Msg } from "../messages";
 import { Model } from "../model";
 import reset from "../styles/reset.css";
 
-export class SongEditElement extends View<Model, Msg> {
+export class SongCreateElement extends View<Model, Msg> {
 	static uses = define({
 		"mu-form": Form.Element,
 	});
-
-	@property({ attribute: "song-id" })
-	songid = "";
 
 	@state()
 	get song(): Song | undefined {
@@ -20,29 +17,16 @@ export class SongEditElement extends View<Model, Msg> {
 	}
 
 	@state()
-	sectionsCount = 0;
+	sectionsCount = 1;
 
 	@state()
-	chordsCount = 0;
+	chordsCount = 1;
 
 	@state()
-	tabsCount = 0;
-
-	@state()
-	private _initialized = false;
+	tabsCount = 1;
 
 	constructor() {
 		super("goodtabs:model");
-	}
-
-	updated(changedProps: Map<string, any>) {
-		console.log("updated props:", [...changedProps.keys()]);
-		if (this.song && !this._initialized && this.song.sections.length >= 1) {
-			this.sectionsCount = this.song.sections?.length;
-			this.chordsCount = this.song.chords?.length || 0;
-			this.tabsCount = this.song.tabs?.length || 0;
-			this._initialized = true;
-		}
 	}
 
 	static styles = [
@@ -215,33 +199,9 @@ export class SongEditElement extends View<Model, Msg> {
 	];
 
 	render() {
-		const init = this.song
-			? {
-				...this.song,
-
-				...(this.song.sections?.reduce((acc, section, i) => {
-					acc[`section-${i}-type`] = section.type;
-					acc[`section-${i}-lyrics`] = section.lyrics;
-					return acc;
-				}, {} as any) || {}),
-
-				...(this.song.chords?.reduce((acc, chord, i) => {
-					acc[`chord-${i}-type`] = chord.section;
-					acc[`chord-${i}-chords`] = chord.chords;
-					return acc;
-				}, {} as any) || {}),
-
-				...(this.song.tabs?.reduce((acc, tab, i) => {
-					acc[`tab-${i}-type`] = tab.section;
-					acc[`tab-${i}-tabBody`] = tab.tabBody;
-					return acc;
-				}, {} as any) || {}),
-			}
-			: {};
-
 		return html`
     <main class="page">
-      <mu-form .init=${init} @mu-form:submit=${this.handleSubmit}>
+      <mu-form .init=${this.song} @mu-form:submit=${this.handleSubmit}>
 
 					<h3>Song Information</h3>
 					<label>
@@ -257,6 +217,7 @@ export class SongEditElement extends View<Model, Msg> {
 					<label>
 						<span>Difficulty</span>
 						<select name="difficulty">
+							<option value="" selected disabled>— Select —</option>
 							<option value="easy"> Easy </option>
 							<option value="medium"> Medium  </option>
 							<option value="hard"> Hard</option>
@@ -284,11 +245,12 @@ export class SongEditElement extends View<Model, Msg> {
 			{ length: this.sectionsCount },
 			(_, i) => html`
           <fieldset>
-            <legend>Section ${i + 1}</legend>
+            <legend>Lyrics Section ${i + 1}</legend>
             
             <label>
               <span>Type</span>
-              <select name="section-${i}-type" .value=${init[`section-${i}-type`] || ""}>
+              <select name="section-${i}-type" >
+								<option value="" selected disabled>— Select —</option>
                 <option value="intro">Intro</option>
                 <option value="verse">Verse</option>
                 <option value="prechorus">Prechorus</option>
@@ -302,7 +264,7 @@ export class SongEditElement extends View<Model, Msg> {
             
             <label>
               <span>Lyrics</span>
-              <textarea name="section-${i}-lyrics">${init[`section-${i}-lyrics`] || ""}</textarea>
+              <textarea name="section-${i}-lyrics"></textarea>
             </label>
           </fieldset>
         `,
@@ -316,8 +278,11 @@ export class SongEditElement extends View<Model, Msg> {
 		<button 
 		type="button"
 		class="remove-section-btn"
-		@click=${() => this.sectionsCount--}>
-		- Add Lyrics Section
+		?disabled=${this.sectionsCount <= 1}
+    @click=${() => {
+				if (this.sectionsCount > 1) this.sectionsCount--;
+			}}>
+		- Remove Lyrics Section
 		</button>
 
 
@@ -325,8 +290,8 @@ export class SongEditElement extends View<Model, Msg> {
 
         <h3>Chords Sections</h3>
         ${Array.from(
-			{ length: this.chordsCount },
-			(_, i) => html`
+				{ length: this.chordsCount },
+				(_, i) => html`
           <fieldset>
             <legend>Section ${i + 1}
 
@@ -334,7 +299,8 @@ export class SongEditElement extends View<Model, Msg> {
             
             <label>
               <span>Type</span>
-              <select name="chord-${i}-type" .value=${init[`chord-${i}-type`] || ""}>
+              <select name="chord-${i}-type" >
+								<option value="" selected disabled>— Select —</option>
                 <option value="intro">Intro</option>
                 <option value="verse">Verse</option>
                 <option value="prechorus">Prechorus</option>
@@ -348,11 +314,11 @@ export class SongEditElement extends View<Model, Msg> {
             
             <label>
               <span>Chords</span>
-              <textarea name="chord-${i}-chords"> ${init[`chord-${i}-chords`] || ""}</textarea>
+              <textarea name="chord-${i}-chords"></textarea>
             </label>
           </fieldset>
         `,
-		)}
+			)}
 		<button 
             type="button" 
             class="add-section-btn"
@@ -362,21 +328,25 @@ export class SongEditElement extends View<Model, Msg> {
 		<button 
             type="button" 
             class="remove-section-btn"
-            @click=${() => this.chordsCount--}>
-            - Add Chords Section
+							?disabled=${this.chordsCount <= 1}
+            @click=${() => {
+				if (this.chordsCount > 1) this.chordsCount--;
+			}}>
+            - Remove Chords Section
     </button>
 
 
         <h3>Tabs Sections</h3>
         ${Array.from(
-			{ length: this.tabsCount },
-			(_, i) => html`
+				{ length: this.tabsCount },
+				(_, i) => html`
           <fieldset>
             <legend>Section ${i + 1}</legend>
             
             <label>
               <span>Type</span>
-              <select name="tab-${i}-type" .value=${init[`tab-${i}-type`] || ""}>
+              <select name="tab-${i}-type">
+								<option value="" selected disabled>— Select —</option>
                 <option value="intro">Intro</option>
                 <option value="verse">Verse</option>
                 <option value="prechorus">Prechorus</option>
@@ -390,11 +360,11 @@ export class SongEditElement extends View<Model, Msg> {
             
             <label>
               <span>Tabs</span>
-              <textarea name="tab-${i}-tabBody"> ${init[`tab-${i}-tabBody`] || ""}</textarea>
+              <textarea name="tab-${i}-tabBody">  </textarea>
             </label>
           </fieldset>
         `,
-		)}
+			)}
 		<button 
 			type="button" 
 			class="add-section-btn"
@@ -404,8 +374,11 @@ export class SongEditElement extends View<Model, Msg> {
 		<button 
 			type="button" 
 			class="remove-section-btn"
-			@click=${() => this.tabsCount--}>
-			- Add Tab Section
+			?disabled=${this.tabsCount <= 1}
+      @click=${() => {
+				if (this.tabsCount > 1) this.tabsCount--;
+			}}>
+			- Remove Tab Section
 		</button>
       </mu-form>
     </main>`;
@@ -441,16 +414,16 @@ export class SongEditElement extends View<Model, Msg> {
 		}));
 
 		console.log("Reconstructed data:", json);
+
 		this.dispatchMessage([
-			"song/save",
+			"song/create",
 			{
-				songid: this.songid,
-				song: json,
+				song: json as Song,
 			},
 			{
 				onSuccess: () =>
 					History.dispatch(this, "history/navigate", {
-						href: `/app/song/${this.songid}`,
+						href: `/app`,
 					}),
 				onFailure: (error: Error) => console.log("ERROR:", error),
 			},

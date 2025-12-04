@@ -9,8 +9,15 @@ import { SongsElement } from "./components/songs";
 import { HomeViewElement } from "./views/home-view";
 import { SongViewElement } from "./views/song-view";
 import { SongEditElement } from "./views/song-edit";
+import { SongCreateElement} from "./views/song-create";
 
 const routes = [
+	{
+		path: "/app/song/create",
+		view: () => html`
+			<song-create></song-create>
+		`
+	},
 	{
 		path: "/app/song/:id/edit",
 		view: (params: Switch.Params) => html`
@@ -57,6 +64,7 @@ define({
 
 	"song-view": SongViewElement,
 	"song-edit": SongEditElement,
+	"song-create": SongCreateElement,
 });
 
 HeaderElement.initializeOnce();

@@ -77,6 +77,7 @@ export class LoginFormElement extends LitElement {
 	}
 	override render() {
 		return html`
+		<main class ="page">
       <form
         @change=${(e: InputEvent) => this.handleChange(e)}
         @submit=${(e: SubmitEvent) => this.handleSubmit(e)}
@@ -91,6 +92,7 @@ export class LoginFormElement extends LitElement {
         </slot>
         <p class="error">${this.error}</p>
       </form>
+		</main>
     `;
 	}
 
@@ -103,7 +105,28 @@ export class LoginFormElement extends LitElement {
         border: 1px solid var(--color-error);
         padding: var(--size-spacing-medium);
       }
+
+
+
+		main.page {
+        --page-grids: 8;
+
+        display: grid;
+        grid-column: 1/-1;
+        grid-template-columns: repeat(var(--page-grids), 1fr);
+        gap: var(--size-spacing-small)
+          var(--size-spacing-medium);
+        padding: var(--size-spacing-medium);
+        grid-template-rows: auto auto 1fr auto;
+        grid-template-areas: "-- fm fm fm fm fm fm -1";
+        gap: var(--size-spacing-medium)
+          var(--size-spacing-large);
+      }
+      mu-form {
+        display: grid;
+        grid-area: fm;
+        grid-template-columns: subgrid;
+      }
   `,
 	];
-
 }

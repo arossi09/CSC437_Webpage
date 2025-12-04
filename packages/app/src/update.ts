@@ -34,14 +34,30 @@ export default function update(
 			const { song } = payload;
 			return { ...model, song };
 		}
+
 		case "song/save": {
 			const { songid } = payload;
-			console.log("Saving song to API..." );
+			console.log("Saving song to API...");
 			return [
 				model,
-				saveProfile(payload, user, callbacks).then((song) => [
+				saveSong(payload, user, callbacks).then((song) => [
 					"song/load",
 					{ songid, song },
+				]),
+			];
+		}
+
+		//this is needed to handle message for creating a song PUT request
+		case "song/create": {
+			if (!("song" in payload)) {
+				throw new Error("Payload missing song for song/create");
+			}
+			//const { song } = payload;
+			return [
+				model,
+				createSong(payload, user, callbacks).then((createdSong) => [
+					"song/load",
+					{ song: createdSong },
 				]),
 			];
 		}
@@ -67,7 +83,7 @@ function requestSong(payload: { songid: string }, user: Auth.User) {
 			throw new Error("No JSON in server response");
 		});
 }
-function saveProfile(
+function saveSong(
 	msg: {
 		songid: string;
 		song: Song;
@@ -84,8 +100,39 @@ function saveProfile(
 		body: JSON.stringify(msg.song),
 	})
 		.then((response: Response) => {
-			if (response.status === 200) return response.json();
+			if (response.status === 200 ) return response.json();
 			else throw new Error(`Failed to save song for ${msg.song}`);
+		})
+		.then((json: unknown) => {
+			if (json) {
+				if (reactions?.onSuccess) reactions.onSuccess();
+				return json as Song;
+			} else throw "No JSON in API response";
+		})
+		.catch((err) => {
+			if (reactions?.onFailure) reactions.onFailure(err);
+			throw err;
+		});
+}
+
+function createSong(
+	msg: { song: Song },
+	user?: Auth.User,
+	reactions?: Message.Reactions,
+): Promise<Song> {
+	return fetch(`/api/songs/`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			...Auth.headers(user),
+		},
+		body: JSON.stringify(msg.song),
+	})
+		.then((response: Response) => {
+			console.log("Response status:", response.status);
+			console.log("Response ok:", response.ok);
+			if (response.status === 200 || response.status === 201) return response.json();
+			else throw new Error(`Failed to create song for ${msg.song}`);
 		})
 		.then((json: unknown) => {
 			if (json) {

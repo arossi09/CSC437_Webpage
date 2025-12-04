@@ -129,7 +129,7 @@ export class HeaderElement extends LitElement {
 			}
 
 			a {
-				color: var(--color-link);
+				color: white;
 				font-weight: bold;
 				text-decoration: none;
 			}

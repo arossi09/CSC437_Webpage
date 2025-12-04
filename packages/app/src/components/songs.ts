@@ -67,7 +67,11 @@ export class SongsElement extends LitElement {
 		return html`
 			<ul class="songs">
 				<h2>
+					<div class="grouped-h2">
 					list
+					<a style="text-align: right;" href="/app/song/create">New Song +</a>
+					</div>
+					<hr>
 				</h2>
 				${songCards.map(renderSongCards)}
 			</ul>
@@ -95,6 +99,23 @@ export class SongsElement extends LitElement {
 		flex-basis: auto;
 	}
 
+	hr { 
+		margin: 10 10;
+		border: none;
+		border-top: 1px dotted;
+		padding: 10 10;
+	}
+
+	.grouped-h2 {
+		display: flex;
+		justify-content: space-between;
+		margin: 10 10;
+	}
+
+	a{
+		color: var(--color-link);
+		text-decoration: none;
+	}
 	&>* {
 
 		/*flex-grow: 1;*/
@@ -112,4 +133,3 @@ export class SongsElement extends LitElement {
 	`,
 	];
 }
-

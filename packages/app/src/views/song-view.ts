@@ -46,9 +46,9 @@ export class SongViewElement extends View<Model, Msg> {
 						<h3>${this.song.artist}</h3>
 					</div>
 					<div class="grouped meta">
-					Difficulty: ${this.song.difficulty} *
-          ${this.song.key ? html`<p>Key: ${this.song.key}</p>` : ""} *
-          ${this.song.bpm ? html`<p>BPM: ${this.song.bpm}</p>` : ""} *
+					Difficulty: ${this.song.difficulty} ⋆
+          ${this.song.key ? html`<p>Key: ${this.song.key}</p>` : ""} ⋆
+          ${this.song.bpm ? html`<p>BPM: ${this.song.bpm}</p>` : ""} ⋆
 					<a href="/app/song/${this.songId}/edit">Edit Song</a>
 					</div>
         </header>
@@ -170,6 +170,12 @@ export class SongViewElement extends View<Model, Msg> {
 			background-color: var(--color-song-card); 
 			z-index: 1;
 		}
+
+a {
+	color: var(--color-link);
+	font-weight: bold;
+	text-decoration: none;
+}
 
     hr {
       border: none;
