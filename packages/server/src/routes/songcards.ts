@@ -43,6 +43,17 @@ router.put("/:title", (req: Request, res: Response) => {
 		.catch((err) => res.status(404).end());
 });
 
+/*
+router.put("/by-song/:songid", (req: Request, res: Response) => {
+	const { songid } = req.params;
+	const data = req.body;
+	songCards
+		.updateBySongId(songid, data)
+		.then((updatedCard: songCard) => res.json(updatedCard))
+		.catch((err) => res.status(500).end());
+});
+*/
+
 router.delete("/:title", (req: Request, res: Response) => {
 	const { title } = req.params;
 

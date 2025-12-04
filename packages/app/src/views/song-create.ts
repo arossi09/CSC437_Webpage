@@ -224,6 +224,7 @@ export class SongCreateElement extends View<Model, Msg> {
 						</select>
           </label>
 
+
 					<label>
 						<span>Genre</span>
 						<input name="genre"/>
@@ -334,8 +335,6 @@ export class SongCreateElement extends View<Model, Msg> {
 			}}>
             - Remove Chords Section
     </button>
-
-
         <h3>Tabs Sections</h3>
         ${Array.from(
 				{ length: this.tabsCount },

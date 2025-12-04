@@ -8,6 +8,7 @@ const songSchema = new Schema<Song>(
 		artist: { type: String, required: true, trim: true },
 		difficulty: { type: String, required: true, trim: true },
 		genre: { type: String, requried: true, trim: true },
+		//instrument: {type: String, required: true, trim: true},
 		key: { type: String, required: false },
 		bpm: { type: String, required: false },
 		sections: [
@@ -57,7 +58,8 @@ function create(json: Song): Promise<Song> {
 			artist: savedSong.artist,
 			difficulty: savedSong.difficulty,
 			genre: savedSong.genre,
-			songId: savedSong._id.toString(), // reference full song
+			//icon: savedSong.instrument,
+			songId: savedSong._id.toString(), 
 		});
 
 		return card.save().then(() => savedSong);

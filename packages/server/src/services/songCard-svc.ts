@@ -7,6 +7,7 @@ const songCardSchema = new Schema<songCard>(
 		artist: { type: String, required: true, trim: true },
 		difficulty: { type: String, required: true },
 		genre: { type: String, required: true },
+		//instrument: { type: String, required: true },
 		songId: { type: String, required: true },
 	},
 	{ collection: "song_cards" },
@@ -17,6 +18,10 @@ const songCardModel = model<songCard>("songCard", songCardSchema);
 function index(): Promise<songCard[]> {
 	return songCardModel.find();
 }
+
+//need to change this so that it gets the song by the
+//songID from the song collection and then populates the model
+//so that it changes when songs are updated
 
 //used to get a json from songcard title
 function get(title: String): Promise<songCard> {
@@ -45,6 +50,21 @@ function update(title: String, songcard: songCard): Promise<songCard> {
 			else return updated as songCard;
 		});
 }
+
+/*
+function updateBySongId(songid: string, data: Partial<songCard>): Promise<songCard> {
+  return songCardModel
+    .findOneAndUpdate(
+      { songId: songid },
+      data,
+      { new: true, upsert: true }
+    )
+    .then((updated) => {
+      if (!updated) throw `SongCard for songId ${songid} not updated`;
+      return updated;
+    });
+}
+*/
 
 function remove(title: String): Promise<void> {
 	return songCardModel.findOneAndDelete({ title }).then((deleted) => {

@@ -8,6 +8,7 @@ export interface Song {
 	artist: string;
 	difficulty: string;
 	genre: string;
+	//instrument: string;
 	key?: string;
 	bpm?: number;
 	sections: Array<SongSection>;

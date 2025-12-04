@@ -10,18 +10,13 @@ export class SongCardElement extends LitElement {
 	@property({ type: String }) difficulty = "";
 	@property({ type: String }) genre = "";
 	@property({ type: String }) songId = "";
-	/*
-	@property({ type: String }) song_link = "";
-	@property({ type: String }) artist_link = "";
-	@property({ type: String }) difficulty_link= "";
-	@property({ type: String }) genre_link= "";
-	*/
+	@property({ type: String }) instrument = "";
 
 	override render() {
 		return html`
 				<li class ="song">
 					<svg class="icon">
-						<use href="/icons/instruments.svg#icon-guitar"/>
+						<use href="/icons/instruments.svg#icon-${this.instrument}"/>
 					</svg>
 					<a href="/app/song/${this.songId}">${this.title}</a>
 					by

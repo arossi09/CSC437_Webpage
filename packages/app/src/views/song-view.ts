@@ -35,6 +35,12 @@ export class SongViewElement extends View<Model, Msg> {
 		}
 	}
 
+
+	/*
+					<svg class="icon">
+					<use href="/icons/instruments.svg#icon-${this.song.instrument}"/>
+					</svg> ⋆
+					*/
 	render() {
 		if (!this.song) return html`<p> Loading song</p>`;
 
@@ -49,6 +55,7 @@ export class SongViewElement extends View<Model, Msg> {
 					Difficulty: ${this.song.difficulty} ⋆
           ${this.song.key ? html`<p>Key: ${this.song.key}</p>` : ""} ⋆
           ${this.song.bpm ? html`<p>BPM: ${this.song.bpm}</p>` : ""} ⋆
+
 					<a href="/app/song/${this.songId}/edit">Edit Song</a>
 					</div>
         </header>
@@ -128,6 +135,15 @@ export class SongViewElement extends View<Model, Msg> {
       align-items: baseline;
       gap: 0.4rem;
     }
+
+		svg.icon {
+			display: inline;
+			height: 3em;
+			width: 3em;
+			vertical-align: middle;
+			fill: currentColor;
+
+		}
 
     .grouped.meta {
       font-size: 0.85rem;

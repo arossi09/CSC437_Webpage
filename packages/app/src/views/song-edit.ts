@@ -164,6 +164,16 @@ export class SongEditElement extends View<Model, Msg> {
         padding: var(--size-spacing-small) var(--size-spacing-medium);
       }
 
+
+			svg.icon {
+				display: inline;
+				height: 2em;
+				width: 2em;
+				vertical-align: top;
+				fill: currentColor;
+
+			}
+
 			input{
 				background: transparent;
 				border: none;
@@ -260,6 +270,14 @@ export class SongEditElement extends View<Model, Msg> {
 							<option value="easy"> Easy </option>
 							<option value="medium"> Medium  </option>
 							<option value="hard"> Hard</option>
+						</select>
+          </label>
+
+					<label>
+						<span>Instrument</span>
+						<select name="instrument">
+							<option value="guitar">guitar</option>
+							<option value="bass">bass</option>
 						</select>
           </label>
 

@@ -100,7 +100,7 @@ function saveSong(
 		body: JSON.stringify(msg.song),
 	})
 		.then((response: Response) => {
-			if (response.status === 200 ) return response.json();
+			if (response.status === 200) return response.json();
 			else throw new Error(`Failed to save song for ${msg.song}`);
 		})
 		.then((json: unknown) => {
@@ -114,6 +114,29 @@ function saveSong(
 			throw err;
 		});
 }
+
+/*
+function saveSongCard(song: Song, user?: Auth.User): Promise<void> {
+	return fetch(`/api/songcards/${song.songid}`, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+			...Auth.headers(user),
+		},
+		body: JSON.stringify({
+			title: song.title,
+			artist: song.artist,
+			difficulty: song.difficulty,
+			genre: song.genre,
+			instrument: song.instrument,
+			songId: song.songid,
+		}),
+	}).then((res) => {
+		if (!res.ok)
+			throw new Error(`Failed to update songCard for ${song.songid}`);
+	});
+}
+*/
 
 function createSong(
 	msg: { song: Song },
@@ -131,7 +154,8 @@ function createSong(
 		.then((response: Response) => {
 			console.log("Response status:", response.status);
 			console.log("Response ok:", response.ok);
-			if (response.status === 200 || response.status === 201) return response.json();
+			if (response.status === 200 || response.status === 201)
+				return response.json();
 			else throw new Error(`Failed to create song for ${msg.song}`);
 		})
 		.then((json: unknown) => {
