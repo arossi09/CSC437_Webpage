@@ -51,8 +51,7 @@ function update(title: String, songcard: songCard): Promise<songCard> {
 		});
 }
 
-/*
-function updateBySongId(songid: string, data: Partial<songCard>): Promise<songCard> {
+function updateBySongId(songid: String, data: songCard): Promise<songCard> {
   return songCardModel
     .findOneAndUpdate(
       { songId: songid },
@@ -64,7 +63,6 @@ function updateBySongId(songid: string, data: Partial<songCard>): Promise<songCa
       return updated;
     });
 }
-*/
 
 function remove(title: String): Promise<void> {
 	return songCardModel.findOneAndDelete({ title }).then((deleted) => {
@@ -72,4 +70,4 @@ function remove(title: String): Promise<void> {
 	});
 }
 export { songCardModel };
-export default { index, get, create, update, remove };
+export default { index, get, create, update, remove, updateBySongId};

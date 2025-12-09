@@ -1,9 +1,8 @@
-import { Auth, Events, Observer } from "@calpoly/mustang";
+import { Auth, Events, Observer, define, Dropdown } from "@calpoly/mustang";
 import { html, css, LitElement } from "lit";
 //import headings from "./styles/headings.css.ts";
 import { state } from "lit/decorators.js";
 import reset from "../styles/reset.css";
-
 
 function toggleDarkMode(ev: InputEvent) {
 	const target = ev.target as HTMLInputElement;
@@ -13,6 +12,9 @@ function toggleDarkMode(ev: InputEvent) {
 }
 
 export class HeaderElement extends LitElement {
+	static uses = define({
+		"mu-dropdown": Dropdown.Element,
+	});
 	_authObserver = new Observer<Auth.Model>(this, "goodtabs:auth");
 
 	@state()
@@ -38,7 +40,6 @@ export class HeaderElement extends LitElement {
 	}
 
 	static initializeOnce() {
-
 		function toggleDarkMode(page: HTMLElement | null, checked: any) {
 			page?.classList.toggle("dark-mode", checked);
 		}
@@ -55,8 +56,8 @@ export class HeaderElement extends LitElement {
 		return html`
 			<button
 				@click=${(e: UIEvent) => {
-					Events.relay(e, "auth:message", ["auth/signout"]);
-				}}
+				Events.relay(e, "auth:message", ["auth/signout"]);
+			}}
 				>
 				Sign Out
 				</button>
@@ -87,12 +88,19 @@ export class HeaderElement extends LitElement {
 		</nav>
 
 		<div class="grouped-header">
-		Hello, ${this.userid || "musician"}
+		<mu-dropdown>
+		<a slot="actuator">
+            Hello,
+            <span id="userid">${this.userid|| "musician"}</span>
+          </a>
+		<menu>
 		${this.loggedIn ? this.renderSignOutButton() : this.renderSignInButton()}
 		<label @change=${toggleDarkMode}>
 		<input type="checkbox" />
 		Dark Mode
 		</label>		
+		</menu>
+		</mu-dropdown>
 		</div>
 		</header>
 				`;
@@ -110,6 +118,7 @@ export class HeaderElement extends LitElement {
 			.grouped-header{
 				display:flex;
 				margin: 10 10;
+				padding: 10 10;
 			}
 
 			header {
@@ -127,6 +136,15 @@ export class HeaderElement extends LitElement {
 			header > h1 > a{
 				color: white;
 			}
+			a[slot="actuator"] {
+        color: var(--color-link-inverted);
+        cursor: pointer;
+      }
+			menu a {
+        color: var(--color-link);
+        cursor: pointer;
+        text-decoration: underline;
+      }
 
 			a {
 				color: white;

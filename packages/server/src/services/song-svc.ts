@@ -9,6 +9,7 @@ const songSchema = new Schema<Song>(
 		difficulty: { type: String, required: true, trim: true },
 		genre: { type: String, required: true, trim: true },
 		instrument: {type: String, required: true, trim: true},
+		userid: {type: String, required: true},
 		key: { type: String, required: false },
 		bpm: { type: String, required: false },
 		sections: [

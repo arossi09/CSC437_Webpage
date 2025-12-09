@@ -6,29 +6,6 @@ export class HomeViewElement extends LitElement {
 			<main class="page">
 				<song-list src="/api/songcards">
 				</song-list>
-			<section class="saved">
-				<h2>
-					Saved
-				</h2>
-				<!--
-				<ul>
-					<li class="song">
-						<svg class="icon">
-							<use href="/icons/instruments.svg#icon-guitar"/>
-						</svg>
-						<a href="song.html">Halfright</a>
-						by
-						<a href="band.html">Heatmiser</a>
-					</li>
-					<li class="song">
-						<svg class="icon">
-							<use href="/icons/instruments.svg#icon-guitar"/>
-						</svg>
-						Fade Into You by Mazzy Star
-					</li>
-				</ul>
-				-->
-			</section>
 			</main>
 		`;
 	}

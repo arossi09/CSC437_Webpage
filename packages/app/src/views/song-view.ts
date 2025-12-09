@@ -53,6 +53,7 @@ export class SongViewElement extends View<Model, Msg> {
 					<svg class="icon">
 					<use href="/icons/instruments.svg#icon-${this.song.instrument}"/>
 					</svg> ⋆
+					Created by ${this.song.userid} ⋆
 					<a href="/app/song/${this.songId}/edit">Edit Song</a>
 					</div>
         </header>

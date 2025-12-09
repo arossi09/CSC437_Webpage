@@ -1,5 +1,6 @@
 :root {
     --color-link: rgb(125 146 103);
+    --color-link-inverted: rgb(255, 215, 0);
 		--color-background-page: rgb(252 250 226);
 		--color-text: black;
 		--color-song-card: rgb(255 255 240);

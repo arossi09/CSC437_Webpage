@@ -90,7 +90,7 @@ export class SongsElement extends LitElement {
     
 .songs {
 
-	grid-column-end: span 2;
+	grid-column: 2/ 4;
 	margin: var(--size-spacing-small);
 	padding: var(--size-spacing-small);
 

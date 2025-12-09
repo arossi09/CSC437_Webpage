@@ -17,7 +17,6 @@ router.get("/", (_, res: Response) => {
 
 router.get("/:title", (req: Request, res: Response) => {
 	const { title } = req.params;
-
 	songCards
 		.get(title)
 		.then((songcard: songCard) => res.json(songcard))
@@ -43,7 +42,7 @@ router.put("/:title", (req: Request, res: Response) => {
 		.catch((err) => res.status(404).end());
 });
 
-/*
+//given the songid updates the songcards info
 router.put("/by-song/:songid", (req: Request, res: Response) => {
 	const { songid } = req.params;
 	const data = req.body;
@@ -52,7 +51,6 @@ router.put("/by-song/:songid", (req: Request, res: Response) => {
 		.then((updatedCard: songCard) => res.json(updatedCard))
 		.catch((err) => res.status(500).end());
 });
-*/
 
 router.delete("/:title", (req: Request, res: Response) => {
 	const { title } = req.params;

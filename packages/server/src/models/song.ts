@@ -9,6 +9,7 @@ export interface Song {
 	difficulty: string;
 	genre: string;
 	instrument: string;
+	userid: string;
 	key?: string;
 	bpm?: number;
 	sections: Array<SongSection>;

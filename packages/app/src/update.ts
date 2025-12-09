@@ -91,6 +91,7 @@ function saveSong(
 	user?: Auth.User,
 	reactions?: Message.Reactions,
 ): Promise<Song> {
+	saveSongCard(msg, user);
 	return fetch(`/api/songs/${msg.songid}`, {
 		method: "PUT",
 		headers: {
@@ -115,28 +116,30 @@ function saveSong(
 		});
 }
 
-/*
-function saveSongCard(song: Song, user?: Auth.User): Promise<void> {
-	return fetch(`/api/songcards/${song.songid}`, {
+function saveSongCard(
+	msg: { songid: string; song: Song },
+	user?: Auth.User,
+): Promise<void> {
+	console.log("saveSongCard()", msg.songid, msg.song);
+	return fetch(`/api/songcards/by-song/${msg.songid}`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
 			...Auth.headers(user),
 		},
 		body: JSON.stringify({
-			title: song.title,
-			artist: song.artist,
-			difficulty: song.difficulty,
-			genre: song.genre,
-			instrument: song.instrument,
-			songId: song.songid,
+			title: msg.song.title,
+			artist: msg.song.artist,
+			difficulty: msg.song.difficulty,
+			genre: msg.song.genre,
+			instrument: msg.song.instrument,
+			songId: msg.song.songid,
 		}),
 	}).then((res) => {
 		if (!res.ok)
-			throw new Error(`Failed to update songCard for ${song.songid}`);
+			throw new Error(`Failed to update songCard for ${msg.songid}`);
 	});
 }
-*/
 
 function createSong(
 	msg: { song: Song },

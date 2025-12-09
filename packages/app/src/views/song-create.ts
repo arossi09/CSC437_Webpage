@@ -1,4 +1,4 @@
-import { define, Form, View, History } from "@calpoly/mustang";
+import { Auth, Observer, define, Form, View, History } from "@calpoly/mustang";
 import { css, html } from "lit";
 import { state } from "lit/decorators.js";
 import { Song } from "server/models";
@@ -11,10 +11,17 @@ export class SongCreateElement extends View<Model, Msg> {
 		"mu-form": Form.Element,
 	});
 
+	_authObserver = new Observer<Auth.Model>(this, "goodtabs:auth");
+
 	@state()
 	get song(): Song | undefined {
 		return this.model.song;
 	}
+	@state()
+	loggedIn = false;
+
+	@state()
+	userid?: string;
 
 	@state()
 	sectionsCount = 1;
@@ -27,6 +34,22 @@ export class SongCreateElement extends View<Model, Msg> {
 
 	constructor() {
 		super("goodtabs:model");
+	}
+
+	connectedCallback() {
+		super.connectedCallback();
+
+		this._authObserver.observe((auth: Auth.Model) => {
+			const { user } = auth;
+
+			if (user && user.authenticated) {
+				this.loggedIn = true;
+				this.userid = user.username;
+			} else {
+				this.loggedIn = false;
+				this.userid = undefined;
+			}
+		});
 	}
 
 	static styles = [
@@ -421,6 +444,11 @@ export class SongCreateElement extends View<Model, Msg> {
 			section: ex(`tab-${i}-type`),
 			tabBody: ex(`tab-${i}-tabBody`),
 		}));
+		if(this.loggedIn) {
+			json.userid = this.userid;
+		}else{
+			json.userid = "Anonymous";
+		}
 
 		console.log("Reconstructed data:", json);
 

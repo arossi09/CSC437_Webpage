@@ -139,3 +139,7 @@ nav>a {
 	color: white;
 	text-align: right;
 }
+
+card{
+	grid-column: 2/2;
+}
