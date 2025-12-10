@@ -5,4 +5,5 @@ export interface songCard {
 	genre: string;
 	instrument: string;
 	songId: string;
+	userid: string;
 }

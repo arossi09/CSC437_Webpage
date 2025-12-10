@@ -6,6 +6,7 @@ import update from "./update";
 import { HeaderElement } from "./components/header";
 import { SongCardElement } from "./components/songcard";
 import { SongsElement } from "./components/songs";
+import { MySongsElement} from "./components/my-songs";
 import { HomeViewElement } from "./views/home-view";
 import { SongViewElement } from "./views/song-view";
 import { SongEditElement } from "./views/song-edit";
@@ -51,6 +52,7 @@ define({
 	"home-view": HomeViewElement,
 	"song-card": SongCardElement,
 	"song-list": SongsElement,
+	"my-song-list":  MySongsElement,
 	"mu-switch": class AppSwitch extends Switch.Element {
 		constructor() {
 			super(routes, "goodtabs:history", "goodtabs:auth");

@@ -10,13 +10,20 @@ interface songCard {
 	genre: string;
 	instrument: string;
 	songId: string;
+	userid: string;
 }
 
-export class SongsElement extends LitElement {
+export class MySongsElement extends LitElement {
 	@property() src?: string;
 
 	@state()
 	songCards: Array<songCard> = [];
+
+	@state()
+	userid?: string;
+
+	@state()
+	loggedIn = false;
 
 	_authObserver = new Observer<Auth.Model>(this, "goodtabs:auth");
 	_user?: Auth.User;
@@ -34,6 +41,14 @@ export class SongsElement extends LitElement {
 		this._authObserver.observe((auth: Auth.Model) => {
 			this._user = auth.user;
 			if (this.src) this.hydrate(this.src);
+
+			if (this._user && this._user.authenticated) {
+				this.loggedIn = true;
+				this.userid = this._user.username;
+			} else {
+				this.loggedIn = false;
+				this.userid = undefined;
+			}
 		});
 	}
 
@@ -53,24 +68,28 @@ export class SongsElement extends LitElement {
 
 	render() {
 		const { songCards } = this;
-
-		function renderSongCards(songCard: songCard) {
-			return html`
-				<song-card title=${songCard.title}
-				           artist=${songCard.artist}
-				           difficulty=${songCard.difficulty}
-				           genre=${songCard.genre}
-									 instrument=${songCard.instrument}
-									 songId=${songCard.songId}
-				>
+		const renderSongCards = (songCard: songCard) => html`
+		${this.userid === songCard.userid
+				? html`
+				<song-card
+					title=${songCard.title}
+					artist=${songCard.artist}
+					difficulty=${songCard.difficulty}
+					genre=${songCard.genre}
+					instrument=${songCard.instrument}
+					songId=${songCard.songId}>
 				</song-card>
-		`;
-		}
+			`
+				: ""
+			}
+	`;
+
 		return html`
 			<ul class="songs">
 				<h2>
 					<div class="grouped-h2">
-					list
+					My Songs
+					<a style="text-align: right;" href="/app/song/create">New Song +</a>
 					</div>
 					<hr>
 				</h2>
@@ -89,7 +108,7 @@ export class SongsElement extends LitElement {
     
 .songs {
 
-	grid-column: 1/ 3;
+	grid-column: 4/ 5;
 	margin: var(--size-spacing-small);
 	padding: var(--size-spacing-small);
 

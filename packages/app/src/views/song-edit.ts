@@ -334,8 +334,11 @@ export class SongEditElement extends View<Model, Msg> {
 		<button 
 		type="button"
 		class="remove-section-btn"
-		@click=${() => this.sectionsCount--}>
-		- Add Lyrics Section
+		?disabled=${this.sectionsCount <= 1}
+    @click=${() => {
+				if (this.sectionsCount > 1) this.sectionsCount--;
+			}}>
+		- Remove Lyrics Section
 		</button>
 
 
@@ -380,8 +383,11 @@ export class SongEditElement extends View<Model, Msg> {
 		<button 
             type="button" 
             class="remove-section-btn"
-            @click=${() => this.chordsCount--}>
-            - Add Chords Section
+							?disabled=${this.chordsCount <= 1}
+            @click=${() => {
+				if (this.chordsCount > 1) this.chordsCount--;
+			}}>
+            - Remove Chords Section
     </button>
 
 
@@ -422,8 +428,11 @@ export class SongEditElement extends View<Model, Msg> {
 		<button 
 			type="button" 
 			class="remove-section-btn"
-			@click=${() => this.tabsCount--}>
-			- Add Tab Section
+			?disabled=${this.tabsCount <= 1}
+      @click=${() => {
+				if (this.tabsCount > 1) this.tabsCount--;
+			}}>
+			- Remove Tab Section
 		</button>
       </mu-form>
     </main>`;

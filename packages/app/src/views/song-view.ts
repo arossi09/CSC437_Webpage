@@ -1,4 +1,4 @@
-import { define, View } from "@calpoly/mustang";
+import { Auth, Observer, define, View } from "@calpoly/mustang";
 import { css, html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { TabSheetElement } from "../components/tab-sheet";
@@ -16,6 +16,24 @@ export class SongViewElement extends View<Model, Msg> {
 		"song-section": SongSectionElement,
 	});
 
+	_authObserver = new Observer<Auth.Model>(this, "goodtabs:auth");
+
+	connectedCallback() {
+		super.connectedCallback();
+
+		this._authObserver.observe((auth: Auth.Model) => {
+			const { user } = auth;
+
+			if (user && user.authenticated) {
+				this.loggedIn = true;
+				this.userid = user.username;
+			} else {
+				this.loggedIn = false;
+				this.userid = undefined;
+			}
+		});
+	}
+
 	@property({ attribute: "song-id" })
 	songId?: string;
 
@@ -23,6 +41,11 @@ export class SongViewElement extends View<Model, Msg> {
 	get song(): Song | undefined {
 		return this.model.song;
 	}
+
+
+	@state()
+	loggedIn = false;
+
 
 	constructor() {
 		super("goodtabs:model");
@@ -34,6 +57,9 @@ export class SongViewElement extends View<Model, Msg> {
 			this.dispatchMessage(["song/request", { songid: newValue }]);
 		}
 	}
+
+	@state()
+	userid?: string;
 
 	render() {
 		if (!this.song) return html`<p> Loading song</p>`;
@@ -54,8 +80,8 @@ export class SongViewElement extends View<Model, Msg> {
 					<use href="/icons/instruments.svg#icon-${this.song.instrument}"/>
 					</svg> ⋆
 					Created by ${this.song.userid} ⋆
-					<a href="/app/song/${this.songId}/edit">Edit Song</a>
-					</div>
+					${this.song.userid === this.userid ? html`<a href="/app/song/${this.songId}/edit">Edit Song</a>` : ""}
+					</div> 
         </header>
 
 				<hr>

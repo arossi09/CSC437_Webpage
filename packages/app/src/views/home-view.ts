@@ -1,11 +1,39 @@
 import { css, html, LitElement } from "lit";
+import { state } from "lit/decorators.js";
+import { Auth, Observer } from "@calpoly/mustang";
 
 export class HomeViewElement extends LitElement {
+	_authObserver = new Observer<Auth.Model>(this, "goodtabs:auth");
+
+	@state()
+	loggedIn = false;
+
+	@state()
+	userid?: string;
+
+	connectedCallback() {
+		super.connectedCallback();
+
+		this._authObserver.observe((auth: Auth.Model) => {
+			const { user } = auth;
+
+			if (user && user.authenticated) {
+				this.loggedIn = true;
+				this.userid = user.username;
+			} else {
+				this.loggedIn = false;
+				this.userid = undefined;
+			}
+		});
+	}
+
 	render() {
 		return html`
 			<main class="page">
 				<song-list src="/api/songcards">
 				</song-list>
+				<my-song-list src="/api/songcards">
+				</my-song-list>
 			</main>
 		`;
 	}

@@ -8,8 +8,8 @@ const songSchema = new Schema<Song>(
 		artist: { type: String, required: true, trim: true },
 		difficulty: { type: String, required: true, trim: true },
 		genre: { type: String, required: true, trim: true },
-		instrument: {type: String, required: true, trim: true},
-		userid: {type: String, required: true},
+		instrument: { type: String, required: true, trim: true },
+		userid: { type: String, required: true },
 		key: { type: String, required: false },
 		bpm: { type: String, required: false },
 		sections: [
@@ -60,7 +60,8 @@ function create(json: Song): Promise<Song> {
 			difficulty: savedSong.difficulty,
 			genre: savedSong.genre,
 			instrument: savedSong.instrument,
-			songId: savedSong._id.toString(), 
+			songId: savedSong._id.toString(),
+			userid: savedSong.userid,
 		});
 
 		return card.save().then(() => savedSong);
@@ -80,7 +81,7 @@ function update(id: string, song: Song): Promise<Song> {
 }
 
 function remove(id: string): Promise<void> {
-	return songModel.findByIdAndDelete( id ).then((deleted) => {
+	return songModel.findByIdAndDelete(id).then((deleted) => {
 		if (!deleted) throw `${id} not deleted`;
 	});
 }

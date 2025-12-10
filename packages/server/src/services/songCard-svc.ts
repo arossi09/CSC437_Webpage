@@ -9,6 +9,7 @@ const songCardSchema = new Schema<songCard>(
 		genre: { type: String, required: true },
 		instrument: { type: String, required: true },
 		songId: { type: String, required: true },
+		userid: { type: String, required: true },
 	},
 	{ collection: "song_cards" },
 );
@@ -33,6 +34,12 @@ function get(title: String): Promise<songCard> {
 		});
 }
 
+/*
+function getByUserId(userid: String): Promise<songCard[]> {
+	return songCardModel.find({ userid });
+}
+*/
+
 //used to create a new songCard via json
 function create(json: songCard): Promise<songCard> {
 	const t = new songCardModel(json);
@@ -52,16 +59,12 @@ function update(title: String, songcard: songCard): Promise<songCard> {
 }
 
 function updateBySongId(songid: String, data: songCard): Promise<songCard> {
-  return songCardModel
-    .findOneAndUpdate(
-      { songId: songid },
-      data,
-      { new: true, upsert: true }
-    )
-    .then((updated) => {
-      if (!updated) throw `SongCard for songId ${songid} not updated`;
-      return updated;
-    });
+	return songCardModel
+		.findOneAndUpdate({ songId: songid }, data, { new: true, upsert: true })
+		.then((updated) => {
+			if (!updated) throw `SongCard for songId ${songid} not updated`;
+			return updated;
+		});
 }
 
 function remove(title: String): Promise<void> {
@@ -70,4 +73,11 @@ function remove(title: String): Promise<void> {
 	});
 }
 export { songCardModel };
-export default { index, get, create, update, remove, updateBySongId};
+export default {
+	index,
+	get,
+	create,
+	update,
+	remove,
+	updateBySongId,
+};

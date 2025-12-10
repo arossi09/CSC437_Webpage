@@ -134,10 +134,10 @@ function saveSongCard(
 			genre: msg.song.genre,
 			instrument: msg.song.instrument,
 			songId: msg.song.songid,
+			userid: msg.song.userid,
 		}),
 	}).then((res) => {
-		if (!res.ok)
-			throw new Error(`Failed to update songCard for ${msg.songid}`);
+		if (!res.ok) throw new Error(`Failed to update songCard for ${msg.songid}`);
 	});
 }
 

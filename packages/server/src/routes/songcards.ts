@@ -15,6 +15,16 @@ router.get("/", (_, res: Response) => {
 		.catch((err) => res.status(500).send(err));
 });
 
+/*
+router.get("/by-user/:userid", (req: Request, res: Response) => {
+	const { userid } = req.params;
+	songCards
+		.getByUserId(userid)
+		.then((list: songCard[]) => res.json({ songCards: list }))
+		.catch((err) => res.status(500).send(err));
+});
+*/
+
 router.get("/:title", (req: Request, res: Response) => {
 	const { title } = req.params;
 	songCards
