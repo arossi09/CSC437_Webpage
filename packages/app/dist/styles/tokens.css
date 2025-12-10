@@ -1,0 +1,26 @@
+:root {
+    --color-link: rgb(125 146 103);
+    --color-link-inverted: rgb(255, 215, 0);
+		--color-background-page: rgb(252 250 226);
+		--color-text: black;
+		--color-song-card: rgb(255 255 240);
+		--color-header: rgb(125 146 103);
+		--color-alt-text: rgb(125 146 103);
+
+    --size-spacing-small: 0.25rem;
+    --size-spacing-medium: 0.5rem;
+    --size-spacing-large: 1rem;
+    --size-spacing-xlarge: 2rem;
+
+
+}
+body.dark-mode{
+	--color-background-page: rgb(20, 20, 20);
+	--color-text: rgb(173, 173, 212);
+	--color-alt-text: rgb(125 146 203);
+
+	--color-song-card: rgb(73, 73, 109);
+	--color-link: rgb(186, 214, 214);
+	--color-header: rgb(0, 0, 0);
+	
+}
